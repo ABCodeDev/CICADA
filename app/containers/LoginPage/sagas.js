@@ -2,6 +2,8 @@ import { take, call, put, select } from 'redux-saga/effects';
 import request from 'utils/request';
 import { takeLatest } from 'redux-saga';
 import { LOCATION_CHANGE } from 'react-router-redux';
+import LoginSuccess from './actions';
+import { routerMiddleware, push } from 'react-router-redux'
 
 import {
   API_BASE,
@@ -34,11 +36,11 @@ function* loginSaga(){
 function* Attemptlogin(){
   const requestURL = `${API_BASE}${API_AUTH_LOGIN}`;
 
-  let data = store.getState().loginAttempt;
+  let data = yield take("LOGIN_ACTION").payload;
   const loginCall = yield call(request, requestURL, {
     method: 'POST',
     headers: {
-      Authorization: auth,
+
     },
     body:data
   });
@@ -50,12 +52,13 @@ function* Attemptlogin(){
     const fetcUserProfileCall = yield call(request, requestURL, {
       method: 'GET',
       headers: {
-        Authorization: auth,
+
       },
     });
 
     if(!fetchUserProfileCall.err){
-      yield put({type:"LOGIN_SUCCESS",loggedIn:true,loggedInUser:fetcUserProfileCall.data})
+      yield put(LoginSuccess(fetcUserProfileCall.data,loginCall.data.token));
+
     }else{
       yield put ({type: "LOGIN_FAILED"});
     }

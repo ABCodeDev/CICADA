@@ -28,11 +28,12 @@ export function loginAction(username,email,password){
   };
 }
 
-export  function loginSuccess(userData){
+export  function loginSuccess(userData,token){
   return{
     type: LOGIN_SUCCESS,
     payload: {
-      user : userData
+      user : userData,
+      token:token
     }
   }
 }
