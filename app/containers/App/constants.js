@@ -10,8 +10,7 @@
  */
 
 export const DEFAULT_LOCALE = 'en';
-export const LOG_OUT = 'app/App/LOG_OUT';
-export const LOG_IN = 'app/App/LOG_IN';
-
 
 export const API_BASE = 'https://localhost:8000/api/v1/';
+export const API_USER_PROFILE = 'user-profile/';
+
