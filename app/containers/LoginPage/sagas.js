@@ -6,6 +6,8 @@ import { LOCATION_CHANGE } from 'react-router-redux';
 import {
   API_BASE,
   API_USER_PROFILE,
+  API_AUTH_LOGIN,
+  API_AUTH_USER,
 } from 'containers/App/constants';
 
 // Individual exports for testing
@@ -16,32 +18,50 @@ export function* defaultSaga() {
 // All sagas to be loaded
 export default [
   defaultSaga,
-  LoginSaga,
+  LoginPageSaga,
 ];
 
 function* LoginPageSaga(){
-
+  const loginWatcher = yield fork(loginSaga);
+  yield take(LOCATION_CHANGE);
+  yield cancel(submitTaskWatcher);
 }
 
 function* loginSaga(){
-  yield takeLatest("LOGIN_ACTION",fetchLoginData);
+  yield takeLatest("LOGIN_ACTION",Attemptlogin);
 }
 
-function* fetchLoginData(){
-  const requestURL = `${API_BASE}
+function* Attemptlogin(){
+  const requestURL = `${API_BASE}${API_AUTH_LOGIN}`;
+
+  let data = store.getState().loginAttempt;
   const loginCall = yield call(request, requestURL, {
     method: 'POST',
     headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
+      Authorization: auth,
     },
-    body: {
-
-    }
+    body:data
   });
 
-  if (!fetchServerTimeCall.err) {
+  if (!loginCall.err) {
 
+    const fetchUserURL = `${API_BASE}${API_AUTH_USER}`
+
+    const fetcUserProfileCall = yield call(request, requestURL, {
+      method: 'GET',
+      headers: {
+        Authorization: auth,
+      },
+    });
+
+    if(!fetchUserProfileCall.err){
+      yield put({type:"LOGIN_SUCCESS",loggedIn:true,loggedInUser:fetcUserProfileCall.data})
+    }else{
+      yield put ({type: "LOGIN_FAILED"});
+    }
+
+  }else{
+    yield put ({type: "LOGIN_FAILED"});
   }
 }
 

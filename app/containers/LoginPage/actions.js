@@ -17,9 +17,14 @@ export function defaultAction() {
   };
 }
 
-export function loginAction(){
+export function loginAction(username,email,password){
   return {
-    type: LOGIN_ACTION
+    type: LOGIN_ACTION,
+    payload:{
+      username:username,
+      email:email,
+      password:password,
+    }
   };
 }
 
