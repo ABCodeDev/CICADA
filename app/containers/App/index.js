@@ -27,3 +27,4 @@ export default class App extends React.PureComponent { // eslint-disable-line re
     );
   }
 }
+
