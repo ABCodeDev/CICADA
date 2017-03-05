@@ -4,7 +4,7 @@
  *
  */
 
-
+import { selectLoginFailed } from './selectors';
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
@@ -20,8 +20,7 @@ import PersonAdd from 'material-ui/svg-icons/social/person-add';
 import Help from 'material-ui/svg-icons/action/help';
 import TextField from 'material-ui/TextField';
 import {Link} from 'react-router';
-import loginSuccess from './actions';
-import loginAction from './actions';
+import {loginAction} from './actions';
 
 const styles = {
   loginContainer: {
@@ -102,10 +101,8 @@ export class LoginPage extends React.Component { // eslint-disable-line react/pr
 
     if(event.target.name == "username"){
       username = value;
-      console.log(username);
     }else {
       password = value;
-      console.log(password);
     }
 
     this.setState(Object.assign({username:username,password:password}));
@@ -121,6 +118,8 @@ export class LoginPage extends React.Component { // eslint-disable-line react/pr
 
 
   render() {
+    const failedAttempt = this.props.failedAttempt;
+    console.log("RENDER");
     return (
       <div>
         <Helmet
@@ -163,6 +162,11 @@ export class LoginPage extends React.Component { // eslint-disable-line react/pr
                 </form>
               </Paper>
 
+              {
+                failedAttempt == true &&
+                    <h2>TeST</h2>
+              }
+
               <div style={styles.buttonsDiv}>
                 <FlatButton
                   label="Register"
@@ -188,10 +192,12 @@ export class LoginPage extends React.Component { // eslint-disable-line react/pr
 LoginPage.propTypes = {
   dispatch: PropTypes.func.isRequired,
   loginAction:PropTypes.func.isRequired,
+  failedAttempt: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
   LoginPage: makeSelectLoginPage(),
+  failedAttempt: selectLoginFailed(),
 });
 
 function mapDispatchToProps(dispatch) {

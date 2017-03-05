@@ -12,7 +12,7 @@ import {
   LOGIN_FAILED,
 } from './constants';
 
-const initialState = fromJS({});
+const initialState = fromJS({failedAttempt:false,});
 
 function loginPageReducer(state = initialState, action) {
   switch (action.type) {
@@ -20,11 +20,14 @@ function loginPageReducer(state = initialState, action) {
       return state;
     case LOGIN_ACTION:
       console.log("login action");
-      return Object.assign(state,{loginAttempt: action.payload})
+      let obj_login_action = Object.assign(state,{loginAttempt: action.payload});
+      return obj_login_action;
     case LOGIN_SUCCESS:
-      return Object.assign(state,{loggedIn:true,loggedInUser:action.payload.user});
+      return state;
     case LOGIN_FAILED:
-      return Object.assign(state,{loggedIn:false});
+      let obj_login_failed = Object.assign(state,{loggedIn:false, failedAttempt: true});
+      console.log(obj_login_failed);
+      return obj_login_failed;
     default:
       return state;
   }
