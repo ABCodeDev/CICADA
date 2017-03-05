@@ -12,18 +12,46 @@
  */
 
 import React from 'react';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import {blue600, grey900} from 'material-ui/styles/colors';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import injectTapEventPlugin from 'react-tap-event-plugin';
+
+
+const themeDefault = getMuiTheme({
+  palette: {
+  },
+  appBar: {
+    height: 57,
+    color: blue600
+  },
+  drawer: {
+    width: 230,
+    color: grey900
+  },
+  raisedButton: {
+    primaryColor: blue600,
+  }
+});
+
 
 export default class App extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
+  constructor(){
+    super();
+    injectTapEventPlugin();
+  }
   static propTypes = {
     children: React.PropTypes.node,
   };
 
   render() {
     return (
-      <div>
-        {React.Children.toArray(this.props.children)}
-      </div>
+      <MuiThemeProvider muiTheme={themeDefault}>
+        <div>
+          {React.Children.toArray(this.props.children)}
+        </div>
+      </MuiThemeProvider>
     );
   }
 }
