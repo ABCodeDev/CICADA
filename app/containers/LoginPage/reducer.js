@@ -19,6 +19,7 @@ function loginPageReducer(state = initialState, action) {
     case DEFAULT_ACTION:
       return state;
     case LOGIN_ACTION:
+      console.log("login action");
       return Object.assign(state,{loginAttempt: action.payload})
     case LOGIN_SUCCESS:
       return Object.assign(state,{loggedIn:true,loggedInUser:action.payload.user});

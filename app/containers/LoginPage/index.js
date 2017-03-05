@@ -113,6 +113,7 @@ export class LoginPage extends React.Component { // eslint-disable-line react/pr
   }
 
   handleSubmit(event) {
+    event.preventDefault();
     console.log(this.state);
     console.log(this.state.username, this.state.password);
     this.props.loginAction(this.state.username,"",this.state.password);

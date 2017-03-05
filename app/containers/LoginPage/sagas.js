@@ -30,6 +30,7 @@ function* LoginPageSaga(){
 
 function* loginSaga(){
   yield takeLatest("LOGIN_ACTION",Attemptlogin);
+  console.log("attempt login");
 }
 
 function* Attemptlogin(){
@@ -57,7 +58,7 @@ function* Attemptlogin(){
 
     if(!fetchUserProfileCall.err){
       console.log(fetcUserProfileCall.data);
-      yield put(LoginSuccess(fetcUserProfileCall.data,"Token "+loginCall.data.key));
+      yield put(loginSuccess(fetcUserProfileCall.data,"Token "+loginCall.data.key));
     }else{
       yield put ({type: "LOGIN_FAILED"});
     }
