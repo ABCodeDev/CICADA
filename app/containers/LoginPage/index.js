@@ -18,13 +18,13 @@ export class LoginPage extends React.Component { // eslint-disable-line react/pr
 
   constructor() {
     super();
-    this.handleLogin = this.handleLogin.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   login(username,email,password){
     this.props.attemptLogin(username,email,password);
   }
-
 
 
 render() {
@@ -37,8 +37,6 @@ render() {
           { name: 'description', content: 'Description of LoginPage' },
         ]}
       />
-
-      {/*Put Login form here, use*/}
     </div>
   );
 }
