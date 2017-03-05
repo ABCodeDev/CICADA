@@ -1,7 +1,7 @@
-import { take, call, put, select,fork } from 'redux-saga/effects';
+import { take, call, put, select,fork,cancel } from 'redux-saga/effects';
 import { takeLatest } from 'redux-saga';
 import { LOCATION_CHANGE } from 'react-router-redux';
-import LoginSuccess from './actions';
+import loginSuccess from './actions';
 import { routerMiddleware, push } from 'react-router-redux'
 
 import {
@@ -25,7 +25,7 @@ export default [
 function* LoginPageSaga(){
   const loginWatcher = yield fork(loginSaga);
   yield take(LOCATION_CHANGE);
-  yield cancel(submitTaskWatcher);
+  yield cancel(loginWatcher);
 }
 
 function* loginSaga(){
@@ -33,6 +33,7 @@ function* loginSaga(){
 }
 
 function* Attemptlogin(){
+  console.log("attempt login");
   const requestURL = `${API_BASE}${API_AUTH_LOGIN}`;
 
   let data = yield take("LOGIN_ACTION").payload;
@@ -45,7 +46,6 @@ function* Attemptlogin(){
   });
 
   if (!loginCall.err) {
-
     const fetchUserURL = `${API_BASE}${API_AUTH_USER}`
 
     const fetcUserProfileCall = yield call(request, requestURL, {
@@ -56,7 +56,8 @@ function* Attemptlogin(){
     });
 
     if(!fetchUserProfileCall.err){
-      yield put(LoginSuccess(fetcUserProfileCall.data,loginCall.data.key));
+      console.log(fetcUserProfileCall.data);
+      yield put(LoginSuccess(fetcUserProfileCall.data,"Token "+loginCall.data.key));
     }else{
       yield put ({type: "LOGIN_FAILED"});
     }

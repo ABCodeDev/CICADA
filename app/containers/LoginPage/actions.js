@@ -7,9 +7,10 @@
 import {
   DEFAULT_ACTION,
   LOGIN_SUCCESS,
+  LOGIN_ACTION,
+  LOGIN_FAILED,
 } from './constants';
 
-import LOGIN_ACTION from '../App/constants';
 
 export function defaultAction() {
   return {
@@ -28,7 +29,7 @@ export function loginAction(username,email,password){
   };
 }
 
-export  function loginSuccess(userData,token){
+export function loginSuccess(userData,token){
   return{
     type: LOGIN_SUCCESS,
     payload: {

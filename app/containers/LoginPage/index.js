@@ -4,6 +4,7 @@
  *
  */
 
+
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
@@ -19,7 +20,8 @@ import PersonAdd from 'material-ui/svg-icons/social/person-add';
 import Help from 'material-ui/svg-icons/action/help';
 import TextField from 'material-ui/TextField';
 import {Link} from 'react-router';
-// import ThemeDefault from '../theme-default';
+import loginSuccess from './actions';
+import loginAction from './actions';
 
 const styles = {
   loginContainer: {
@@ -83,30 +85,37 @@ const styles = {
 export class LoginPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
 
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.state = {username:"",password:""};
+    console.log(this.state);
   }
 
   handleChange(event,value) {
     console.log(event.target);
     console.log(event.target.name);
+
+    let username = this.state.username;
+    let password = this.state.password;
+
     if(event.target.name == "username"){
-      const username = value;
+      username = value;
       console.log(username);
-      this.setState(Object.assign(this.state,{username:username}));
     }else {
-      const password = value;
+      password = value;
       console.log(password);
-      this.setState(Object.assign(this.state, {password: password}));
     }
+
+    this.setState(Object.assign({username:username,password:password}));
+    console.log(this.state);
   }
 
   handleSubmit(event) {
-    event.preventDefault();
     console.log(this.state);
     console.log(this.state.username, this.state.password);
+    this.props.loginAction(this.state.username,"",this.state.password);
   }
 
 
@@ -177,6 +186,7 @@ export class LoginPage extends React.Component { // eslint-disable-line react/pr
 
 LoginPage.propTypes = {
   dispatch: PropTypes.func.isRequired,
+  loginAction:PropTypes.func.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -185,6 +195,7 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
+    loginAction:(username,email,password)=>dispatch(loginAction(username,email,password)),
     dispatch,
   };
 }
