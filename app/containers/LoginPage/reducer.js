@@ -9,6 +9,7 @@ import {
   DEFAULT_ACTION,
   LOGIN_ACTION,
   LOGIN_SUCCESS,
+  LOGIN_FAILED,
 } from './constants';
 
 const initialState = fromJS({});
@@ -18,9 +19,9 @@ function loginPageReducer(state = initialState, action) {
     case DEFAULT_ACTION:
       return state;
     case LOGIN_ACTION:
-      return Object.assign(state,{loginData: action.payload});
+      return Object.assign(state,{loginAttempt: action.payload})
     case LOGIN_SUCCESS:
-      return Object.assign(state,{loggedIn:true,loggedInUser:action.payload.user,token:action.payload.token});
+      return Object.assign(state,{loggedIn:true,loggedInUser:action.payload.user});
     case LOGIN_FAILED:
       return Object.assign(state,{loggedIn:false});
     default:

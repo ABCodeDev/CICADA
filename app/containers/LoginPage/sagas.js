@@ -1,5 +1,4 @@
-import { take, call, put, select } from 'redux-saga/effects';
-import request from 'utils/request';
+import { take, call, put, select,fork } from 'redux-saga/effects';
 import { takeLatest } from 'redux-saga';
 import { LOCATION_CHANGE } from 'react-router-redux';
 import LoginSuccess from './actions';
