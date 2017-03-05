@@ -52,13 +52,12 @@ function* Attemptlogin(){
     const fetcUserProfileCall = yield call(request, requestURL, {
       method: 'GET',
       headers: {
-
-      },
+        Authorization:"Token "+loginCall.data.key,
+      }
     });
 
     if(!fetchUserProfileCall.err){
-      yield put(LoginSuccess(fetcUserProfileCall.data,loginCall.data.token));
-
+      yield put(LoginSuccess(fetcUserProfileCall.data,loginCall.data.key));
     }else{
       yield put ({type: "LOGIN_FAILED"});
     }
