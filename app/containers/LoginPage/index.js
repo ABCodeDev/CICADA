@@ -83,6 +83,32 @@ const styles = {
 export class LoginPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
 
+  constructor(){
+    super();
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleChange(event,value) {
+    console.log(event.target);
+    console.log(event.target.name);
+    if(event.target.name == "username"){
+      const username = value;
+      console.log(username);
+      this.setState(Object.assign(this.state,{username:username}));
+    }else {
+      const password = value;
+      console.log(password);
+      this.setState(Object.assign(this.state, {password: password}));
+    }
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
+    console.log(this.state);
+    console.log(this.state.username, this.state.password);
+  }
+
 
   render() {
     return (
@@ -100,27 +126,28 @@ export class LoginPage extends React.Component { // eslint-disable-line react/pr
 
                 <form>
                   <TextField
+                    name="username"
                     hintText="E-mail"
                     fullWidth={true}
+                    onChange={this.handleChange}
                   />
                   <TextField
+                    name="password"
                     hintText="Password"
                     fullWidth={true}
                     type="password"
+                    onChange={this.handleChange}
                   />
 
                   <div>
-                    <Checkbox
-                      label="Remember me"
-                      style={styles.checkRemember.style}
-                      labelStyle={styles.checkRemember.labelStyle}
-                      iconStyle={styles.checkRemember.iconStyle}
-                    />
+
 
                     <Link to="/">
                       <RaisedButton label="Login"
                                     primary={true}
-                                    style={styles.loginBtn}/>
+                                    style={styles.loginBtn}
+                                    onClick={this.handleSubmit}
+                      />
                     </Link>
                   </div>
                 </form>
