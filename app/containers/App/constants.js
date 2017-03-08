@@ -16,6 +16,7 @@ export const API_USER_PROFILE = 'user-profile/';
 export const API_AUTH = 'rest-auth/';
 export const API_AUTH_LOGIN = 'rest-auth/login/';
 export const API_AUTH_USER = 'rest-auth/user/';
+export const API_AUTH_REGISTRATION = 'rest-auth/registration/'
 
 
 export const SET_USER_PROFILE = 'app/App/SET_USER_PROFILE';
