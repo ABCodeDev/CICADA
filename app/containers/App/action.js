@@ -5,12 +5,12 @@
  *
  */
 import {
-  SET_USER_PROFILE
+  SET_USER_PROFILE,
+  LOG_OUT
 } from './constants';
 
 
 export function setUserProfile(userData,token){
-  console.log("set user profile");
   return {
     type: SET_USER_PROFILE,
     payload:{
@@ -20,4 +20,10 @@ export function setUserProfile(userData,token){
   };
 }
 
+export function logOut(){
+  console.log("set user profile");
+  return {
+    type: LOG_OUT,
+  };
+}
 

@@ -71,7 +71,7 @@ class Header extends React.Component {
                         targetOrigin={{horizontal: 'right', vertical: 'top'}}
                         anchorOrigin={{horizontal: 'right', vertical: 'top'}}
               >
-                <MenuItem primaryText="Sign out"/>
+                <MenuItem onTouchTap={this.props.signOutHandler} primaryText="Sign out"/>
               </IconMenu>
             </div>
           }
@@ -83,7 +83,8 @@ class Header extends React.Component {
 
 Header.propTypes = {
   styles: PropTypes.object,
-  handleChangeRequestNavDrawer: PropTypes.func
+  handleChangeRequestNavDrawer: PropTypes.func,
+  signOutHandler : PropTypes.func
 };
 
 export default Header;

@@ -88,6 +88,7 @@ Sidebar.propTypes = {
   navDrawerOpen: PropTypes.bool,
   menus: PropTypes.array,
   username: PropTypes.string,
+  onChangeHandler: PropTypes.func,
 };
 
 export default Sidebar;

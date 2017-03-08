@@ -11,6 +11,9 @@
  * the linting exception.
  */
 
+import {logOut} from './action';
+import { connect } from 'react-redux';
+import { push } from 'react-router-redux';
 import React, { PropTypes } from 'react';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import {blue600, grey900} from 'material-ui/styles/colors';
@@ -19,7 +22,13 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 import Header from '../../components/Header';
 import LeftDrawer from '../../components/Sidebar';
 import withWidth, {LARGE, SMALL} from 'material-ui/utils/withWidth';
-import Data from '../../data';
+import selectGlobal from './selectors';
+
+//navbar icons
+import Assessment from 'material-ui/svg-icons/action/assessment';
+import GridOn from 'material-ui/svg-icons/image/grid-on';
+import PermIdentity from 'material-ui/svg-icons/action/perm-identity';
+import Web from 'material-ui/svg-icons/av/web';
 
 
 const themeDefault = getMuiTheme({
@@ -41,6 +50,7 @@ const themeDefault = getMuiTheme({
 
 class App extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
+
   constructor(props)
   {
     super(props);
@@ -48,6 +58,7 @@ class App extends React.PureComponent { // eslint-disable-line react/prefer-stat
         navDrawerOpen: false
       };
 
+    this.onSignOutHandler = this.onSignOutHandler.bind(this);
       injectTapEventPlugin();
   }
 
@@ -67,30 +78,50 @@ class App extends React.PureComponent { // eslint-disable-line react/prefer-stat
     });
   }
 
+  onSignOutHandler(event){
+
+  }
+
   render() {
 
     let { navDrawerOpen } = this.state;
     const paddingLeftDrawerOpen = 236;
+    const loggedIn = this.props.loggedIn;
+
+    const menus = {
+      default_menu : [
+          { text: 'DashBoard', icon: <Assessment/>, link: '/dashboard' },
+          { text: 'Form Page', icon: <Web/>, link: '/form' },
+          { text: 'Table Page', icon: <GridOn/>, link: '/table' },
+          { text: 'Login Page', icon: <PermIdentity/>, link: '/loginpage' }
+        ]
+    }
 
     const styles = {
       header: {
         paddingLeft: navDrawerOpen ? paddingLeftDrawerOpen : 0
-      },
-      container: {
-        margin: '80px 20px 20px 15px',
-        paddingLeft: navDrawerOpen && this.props.width !== SMALL ? paddingLeftDrawerOpen : 0
-      }
-    };
+              },
+          container: {
+          margin: '80px 20px 20px 15px',
+          paddingLeft: navDrawerOpen && this.props.width !== SMALL ? paddingLeftDrawerOpen : 0
+        }
+          };
 
-    return (
-      <MuiThemeProvider muiTheme={themeDefault}>
-        <div>
-          {/*<Header styles={styles.header}*/}
-                  {/*handleChangeRequestNavDrawer={this.handleChangeRequestNavDrawer.bind(this)}/>*/}
 
-          {/*<LeftDrawer navDrawerOpen={navDrawerOpen}*/}
-                      {/*menus={Data.menus}*/}
-                      {/*username="User Admin"/>*/}
+
+          return (
+          <MuiThemeProvider muiTheme={themeDefault}>
+            <div>
+              {
+                loggedIn == true &&
+                <div><Header styles={styles.header} handleChangeRequestNavDrawer={this.handleChangeRequestNavDrawer.bind(this)}/>
+
+                  <LeftDrawer navDrawerOpen={navDrawerOpen}
+                              menus={menus.default_menu}
+                              username="User Admin"
+                              signOutHandler={this.onSignOutHandler}
+                  /></div>
+          }
           <div style={styles.container}>
             {React.Children.toArray(this.props.children)}
           </div>
@@ -106,4 +137,13 @@ App.propTypes = {
   width: PropTypes.number
 };
 
-export default withWidth()(App);
+const mapStateToProps = selectGlobal();
+
+function mapDispatchToProps(dispatch) {
+  return {
+    logOut:()=>dispatch(logOut()),
+    dispatch,
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
