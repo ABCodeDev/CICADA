@@ -9,7 +9,6 @@ const selectLoginPageDomain = () => (state) => state.get('loginPage');
  * Other specific selectors
  */
 
-export const selectLoginFailed =()=> (state) => state.failedAttempt;
 
 /**
  * Default selector used by LoginPage

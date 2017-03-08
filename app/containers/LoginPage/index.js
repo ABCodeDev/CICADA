@@ -4,6 +4,7 @@
  *
  */
 
+import { selectLoginFailed } from './selectors';
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
@@ -19,7 +20,7 @@ import PersonAdd from 'material-ui/svg-icons/social/person-add';
 import Help from 'material-ui/svg-icons/action/help';
 import TextField from 'material-ui/TextField';
 import {Link} from 'react-router';
-// import ThemeDefault from '../theme-default';
+import {loginAction} from './actions';
 
 const styles = {
   loginContainer: {
@@ -83,8 +84,8 @@ const styles = {
 export class LoginPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
 
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -107,10 +108,13 @@ export class LoginPage extends React.Component { // eslint-disable-line react/pr
     event.preventDefault();
     console.log(this.state);
     console.log(this.state.username, this.state.password);
+    this.props.loginAction(this.state.username,"",this.state.password);
   }
 
 
   render() {
+    const failedAttempt = this.props.LoginPage.failedAttempt;
+    console.log("RENDER");
     return (
       <div>
         <Helmet
@@ -153,6 +157,11 @@ export class LoginPage extends React.Component { // eslint-disable-line react/pr
                 </form>
               </Paper>
 
+              {
+                failedAttempt == true &&
+                    <h2>Incorrect username or password</h2>
+              }
+
               <div style={styles.buttonsDiv}>
                 <FlatButton
                   label="Register"
@@ -177,6 +186,7 @@ export class LoginPage extends React.Component { // eslint-disable-line react/pr
 
 LoginPage.propTypes = {
   dispatch: PropTypes.func.isRequired,
+  loginAction:PropTypes.func.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -185,6 +195,7 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
+    loginAction:(username,email,password)=>dispatch(loginAction(username,email,password)),
     dispatch,
   };
 }

@@ -15,6 +15,27 @@ const makeSelectLocationState = () => {
   };
 };
 
+const selectGlobalDomain = () => (state) => state.get('global');
+
+/**
+ * Other specific selectors
+ */
+
+const selectGlobal = () => createSelector(
+  selectGlobalDomain(),
+  (substate) => substate.toJS()
+);
+
+
+const selectGlobal = () => createSelector(
+  selectGlobalDomain(),
+  (substate) => substate.toJS()
+);
+
+export default selectGlobal;
+
+
 export {
   makeSelectLocationState,
 };
+
