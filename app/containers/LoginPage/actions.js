@@ -38,14 +38,8 @@ export function loginFailed(message){
   };
 }
 
-export function loginSuccess(userData,token){
-  console.log(userData);
-  console.log(token);
+export function loginSuccess(token){
   return{
     type: LOGIN_SUCCESS,
-    payload: {
-      user : userData,
-      token: token
-    }
   }
 }

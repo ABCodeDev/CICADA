@@ -12,6 +12,11 @@
 export const DEFAULT_LOCALE = 'en';
 export const API_BASE = 'http://localhost:8000/api/v1/';
 export const API_USER_PROFILE = 'user-profile/';
+
 export const API_AUTH = 'rest-auth/';
 export const API_AUTH_LOGIN = 'rest-auth/login/';
 export const API_AUTH_USER = 'rest-auth/user/';
+
+
+export const SET_USER_PROFILE = 'app/App/SET_USER_PROFILE';
+export const LOG_OUT = 'app/App/LOG_OUT';
