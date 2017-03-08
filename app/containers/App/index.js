@@ -85,24 +85,18 @@ class App extends React.PureComponent { // eslint-disable-line react/prefer-stat
     return (
       <MuiThemeProvider muiTheme={themeDefault}>
         <div>
-          <Header styles={styles.header}
-                  handleChangeRequestNavDrawer={this.handleChangeRequestNavDrawer.bind(this)}/>
+          {/*<Header styles={styles.header}*/}
+                  {/*handleChangeRequestNavDrawer={this.handleChangeRequestNavDrawer.bind(this)}/>*/}
 
-          <LeftDrawer navDrawerOpen={navDrawerOpen}
-                      menus={Data.menus}
-                      username="User Admin"/>
+          {/*<LeftDrawer navDrawerOpen={navDrawerOpen}*/}
+                      {/*menus={Data.menus}*/}
+                      {/*username="User Admin"/>*/}
           <div style={styles.container}>
             {React.Children.toArray(this.props.children)}
           </div>
         </div>
       </MuiThemeProvider>
 
-      // {/*</MuiThemeProvider>*/}
-      // {/*<MuiThemeProvider muiTheme={themeDefault}>*/}
-      // {/*<div>*/}
-      // {/*{React.Children.toArray(this.props.children)}*/}
-      // {/*</div>*/}
-      // {/*</MuiThemeProvider>*/}
     );
   }
 }

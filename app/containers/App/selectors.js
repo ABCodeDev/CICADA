@@ -1,3 +1,5 @@
+import { createSelector } from 'reselect';
+
 // makeSelectLocationState expects a plain JS object for the routing state
 const makeSelectLocationState = () => {
   let prevRoutingState;
@@ -20,12 +22,6 @@ const selectGlobalDomain = () => (state) => state.get('global');
 /**
  * Other specific selectors
  */
-
-const selectGlobal = () => createSelector(
-  selectGlobalDomain(),
-  (substate) => substate.toJS()
-);
-
 
 const selectGlobal = () => createSelector(
   selectGlobalDomain(),

@@ -14,7 +14,6 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Paper from 'material-ui/Paper';
 import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
-import Checkbox from 'material-ui/Checkbox';
 import {grey500, white} from 'material-ui/styles/colors';
 import PersonAdd from 'material-ui/svg-icons/social/person-add';
 import Help from 'material-ui/svg-icons/action/help';
@@ -86,13 +85,12 @@ export class LoginPage extends React.Component { // eslint-disable-line react/pr
 
   constructor(props){
     super(props);
+    this.state = {username:null,password:null};
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(event,value) {
-    console.log(event.target);
-    console.log(event.target.name);
     if(event.target.name == "username"){
       const username = value;
       console.log(username);
@@ -106,7 +104,6 @@ export class LoginPage extends React.Component { // eslint-disable-line react/pr
 
   handleSubmit(event) {
     event.preventDefault();
-    console.log(this.state);
     console.log(this.state.username, this.state.password);
     this.props.loginAction(this.state.username,"",this.state.password);
   }
@@ -114,6 +111,7 @@ export class LoginPage extends React.Component { // eslint-disable-line react/pr
 
   render() {
     const failedAttempt = this.props.LoginPage.failedAttempt;
+    console.log(failedAttempt);
     console.log("RENDER");
     return (
       <div>

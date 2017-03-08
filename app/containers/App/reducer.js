@@ -16,10 +16,7 @@ const initialState = fromJS({
 function appReducer(state = initialState, action) {
   switch (action.type) {
     case SET_USER_PROFILE:
-      return Object.assign(state,{user:{
-        userProfile:action.payload.userProfile,
-        token:action.payload.token
-      }});
+      return state.set('user',{userProfile:action.payload.userProfile,token:action.payload.token});
     default:
       return state;
   }

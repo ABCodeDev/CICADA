@@ -56,7 +56,7 @@ if (!loginCall.err) {
     const pk = fetchUserCall.data.pk;
     const fetchUserProfileURL = `${API_BASE}${API_USER_PROFILE}${pk}`;
 
-    const fetchUserProfileCall = yield call(request, fetchUserProfile, {
+    const fetchUserProfileCall = yield call(request, fetchUserProfileURL, {
       method: 'GET',
       headers: {
         Authorization: token
@@ -86,6 +86,7 @@ function* loginPageSaga(){
 }
 
 function* loginSaga(){
+  console.log("login saga");
   yield takeLatest(LOGIN_ACTION, attemptLogin);
 }
 

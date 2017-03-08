@@ -14,7 +14,6 @@ import {
 
 const initialState = fromJS({
   failedAttempt:false,
-  loginAttempt:{}
 });
 
 function loginPageReducer(state = initialState, action) {
@@ -22,14 +21,11 @@ function loginPageReducer(state = initialState, action) {
     case DEFAULT_ACTION:
       return state;
     case LOGIN_ACTION:
-      console.log("login action");
-      let obj_login_action = Object.assign(state,{loginAttempt: action.payload});
-      return obj_login_action;
+      return state;
     case LOGIN_SUCCESS:
-      return Ostate;
+      return state;
     case LOGIN_FAILED:
-      let obj_login_failed = Object.assign(state,{failedAttempt: true});
-      return obj_login_failed;
+      return state.set("failedAttempt",true);
     default:
       return state;
   }
