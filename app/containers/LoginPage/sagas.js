@@ -54,7 +54,7 @@ if (!loginCall.err) {
 
   if(!fetchUserCall.err){
     const pk = fetchUserCall.data.pk;
-    const fetchUserProfileURL = `${API_BASE}${API_USER_PROFILE}${pk}`;
+    const fetchUserProfileURL = `${API_BASE}${API_USER_PROFILE}${pk}/`;
 
     const fetchUserProfileCall = yield call(request, fetchUserProfileURL, {
       method: 'GET',

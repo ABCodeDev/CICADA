@@ -9,6 +9,7 @@ import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
 import makeSelectRegisterPage from './selectors';
+import selectGlobal from '../App/selectors'
 
 export class RegisterPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
   render() {
@@ -31,6 +32,7 @@ RegisterPage.propTypes = {
 
 const mapStateToProps = createStructuredSelector({
   RegisterPage: makeSelectRegisterPage(),
+  global:selectGlobal()
 });
 
 function mapDispatchToProps(dispatch) {

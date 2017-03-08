@@ -14,6 +14,7 @@ import {
 
 const initialState = fromJS({
   failedAttempt:false,
+  loggedIn:false
 });
 
 function loginPageReducer(state = initialState, action) {
@@ -23,7 +24,7 @@ function loginPageReducer(state = initialState, action) {
     case LOGIN_ACTION:
       return state;
     case LOGIN_SUCCESS:
-      return state;
+      return state.set("loggedIn",true);
     case LOGIN_FAILED:
       return state.set("failedAttempt",true);
     default:

@@ -5,6 +5,7 @@
  */
 
 import { selectLoginFailed } from './selectors';
+import { push } from 'react-router-redux';
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
@@ -111,8 +112,12 @@ export class LoginPage extends React.Component { // eslint-disable-line react/pr
 
   render() {
     const failedAttempt = this.props.LoginPage.failedAttempt;
-    console.log(failedAttempt);
-    console.log("RENDER");
+    const loggedIn = this.props.LoginPage.loggedIn;
+
+    if(loggedIn){
+      this.props.push('/');
+    }
+
     return (
       <div>
         <Helmet
@@ -185,6 +190,7 @@ export class LoginPage extends React.Component { // eslint-disable-line react/pr
 LoginPage.propTypes = {
   dispatch: PropTypes.func.isRequired,
   loginAction:PropTypes.func.isRequired,
+  push: React.PropTypes.func.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -193,6 +199,7 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
+    push: (url) => dispatch(push(url)),
     loginAction:(username,email,password)=>dispatch(loginAction(username,email,password)),
     dispatch,
   };
