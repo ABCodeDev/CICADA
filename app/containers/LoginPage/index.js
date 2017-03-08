@@ -4,7 +4,6 @@
  *
  */
 
-import { selectLoginFailed } from './selectors';
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
@@ -20,7 +19,7 @@ import PersonAdd from 'material-ui/svg-icons/social/person-add';
 import Help from 'material-ui/svg-icons/action/help';
 import TextField from 'material-ui/TextField';
 import {Link} from 'react-router';
-import {loginAction} from './actions';
+// import ThemeDefault from '../theme-default';
 
 const styles = {
   loginContainer: {
@@ -84,42 +83,34 @@ const styles = {
 export class LoginPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
 
-  constructor(props){
-    super(props);
+  constructor(){
+    super();
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.state = {username:"",password:""};
-    console.log(this.state);
   }
 
   handleChange(event,value) {
     console.log(event.target);
     console.log(event.target.name);
-
-    let username = this.state.username;
-    let password = this.state.password;
-
     if(event.target.name == "username"){
-      username = value;
+      const username = value;
+      console.log(username);
+      this.setState(Object.assign(this.state,{username:username}));
     }else {
-      password = value;
+      const password = value;
+      console.log(password);
+      this.setState(Object.assign(this.state, {password: password}));
     }
-
-    this.setState(Object.assign({username:username,password:password}));
-    console.log(this.state);
   }
 
   handleSubmit(event) {
     event.preventDefault();
     console.log(this.state);
     console.log(this.state.username, this.state.password);
-    this.props.loginAction(this.state.username,"",this.state.password);
   }
 
 
   render() {
-    const failedAttempt = this.props.failedAttempt;
-    console.log("RENDER");
     return (
       <div>
         <Helmet
@@ -162,11 +153,6 @@ export class LoginPage extends React.Component { // eslint-disable-line react/pr
                 </form>
               </Paper>
 
-              {
-                failedAttempt == true &&
-                    <h2>TeST</h2>
-              }
-
               <div style={styles.buttonsDiv}>
                 <FlatButton
                   label="Register"
@@ -191,18 +177,14 @@ export class LoginPage extends React.Component { // eslint-disable-line react/pr
 
 LoginPage.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  loginAction:PropTypes.func.isRequired,
-  failedAttempt: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
   LoginPage: makeSelectLoginPage(),
-  failedAttempt: selectLoginFailed(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
-    loginAction:(username,email,password)=>dispatch(loginAction(username,email,password)),
     dispatch,
   };
 }
