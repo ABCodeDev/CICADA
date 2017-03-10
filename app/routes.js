@@ -94,6 +94,26 @@ export default function createRoutes(store) {
         importModules.catch(errorLoading);
       },
     }, {
+      path: 'formBuilder',
+      name: 'formBuilder',
+      getComponent(nextState, cb) {
+        const importModules = Promise.all([
+          import('containers/FormBuilder/reducer'),
+          import('containers/FormBuilder/sagas'),
+          import('containers/FormBuilder'),
+        ]);
+
+        const renderRoute = loadModule(cb);
+
+        importModules.then(([reducer, sagas, component]) => {
+          injectReducer('formBuilder', reducer.default);
+          injectSagas(sagas.default);
+          renderRoute(component);
+        });
+
+        importModules.catch(errorLoading);
+      },
+    }, {
       path: '*',
       name: 'notfound',
       getComponent(nextState, cb) {

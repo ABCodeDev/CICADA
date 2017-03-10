@@ -43,7 +43,8 @@ const styles = {
 };
 
 export class EditResponsePage extends React.Component { // eslint-disable-line react/prefer-stateless-function
-  render() {
+  render()
+  {
     return (
       <PageBase title="Edit Response"
                 navigation="Application / Form Page">
