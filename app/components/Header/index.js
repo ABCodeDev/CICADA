@@ -50,31 +50,6 @@ class Header extends React.Component {
               <Menu color={white} />
             </IconButton>
           }
-
-          iconElementRight={
-            <div style={style.iconsRightContainer}>
-              <IconMenu color={white}
-                        iconButtonElement={
-                          <IconButton><ViewModule color={white}/></IconButton>
-                        }
-                        targetOrigin={{horizontal: 'right', vertical: 'top'}}
-                        anchorOrigin={{horizontal: 'right', vertical: 'top'}}
-              >
-                <MenuItem key={1} primaryText="Application 1"/>
-                <MenuItem key={2} primaryText="Application 2"/>
-                <MenuItem key={3} primaryText="Application 3"/>
-              </IconMenu>
-              <IconMenu color={white}
-                        iconButtonElement={
-                          <IconButton><MoreVertIcon color={white}/></IconButton>
-                        }
-                        targetOrigin={{horizontal: 'right', vertical: 'top'}}
-                        anchorOrigin={{horizontal: 'right', vertical: 'top'}}
-              >
-                <MenuItem onTouchTap={this.props.signOutHandler} primaryText="Sign out"/>
-              </IconMenu>
-            </div>
-          }
         />
       </div>
     );
@@ -88,13 +63,3 @@ Header.propTypes = {
 };
 
 export default Header;
-
-// class Header extends React.Component { // eslint-disable-line react/prefer-stateless-function
-//   render() {
-//     return (
-//       <div>
-//         <FormattedMessage {...messages.header} />
-//       </div>
-//     );
-//   }
-// }

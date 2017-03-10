@@ -92,7 +92,7 @@ class App extends React.PureComponent { // eslint-disable-line react/prefer-stat
       default_menu : [
           { text: 'DashBoard', icon: <Assessment/>, link: '/dashboard' },
           { text: 'Form Page', icon: <Web/>, link: '/form' },
-          { text: 'Table Page', icon: <GridOn/>, link: '/table' },
+          { text: 'Response Page', icon: <GridOn/>, link: '/response' },
           { text: 'Login Page', icon: <PermIdentity/>, link: '/loginpage' }
         ]
     }
