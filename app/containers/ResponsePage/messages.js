@@ -7,7 +7,7 @@ import { defineMessages } from 'react-intl';
 
 export default defineMessages({
   header: {
-    id: 'app.containers.ResponsePage.header',
+    id: 'app.containers.FormBuilderPage.header',
     defaultMessage: 'This is ResponsePage container !',
   },
 });

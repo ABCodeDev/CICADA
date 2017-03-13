@@ -4,46 +4,85 @@
  *
  */
 
-import React, { PropTypes, Component } from 'react';
+import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { render } from "react-dom";
-import Form from "react-jsonschema-form";
-import Button from 'react-bootstrap/lib/Button';
 import Helmet from 'react-helmet';
-import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
-import makeSelectFormBuilderPage from './selectors';
-import messages from './messages';
+import makeSelectResponsePage from './selectors';
+import PageBase from '../../components/PageBase';
+import Index from "react-bootstrap/lib/index";
+import Form from "react-jsonschema-form";
 
 const schema = {
-  type: "number",
-  enum: [1, 2, 3],
-  enumNames: ["one", "two", "three"]
+  title: "Todo",
+  type: "object",
+  required: ["title"],
+  properties: {
+    title: {type: "string", title: "Title", default: "A new task"},
+    done: {type: "boolean", title: "Done?", default: false}
+  }
 };
 
-const themes = {
-  default: {
-    stylesheet: "//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+const styles = {
+  floatingActionButton: {
+    margin: 0,
+    top: 'auto',
+    right: 20,
+    bottom: 20,
+    left: 'auto',
+    position: 'fixed',
+  },
+  columns: {
+    id: {
+      width: '10%'
+    },
+    name: {
+      width: '40%'
+    },
+    price: {
+      width: '20%'
+    },
+    category: {
+      width: '20%'
+    },
+    edit: {
+      width: '10%'
+    }
   }
 };
 
 const log = (type) => console.log.bind(console, type);
 
-render((
-  <Form schema={schema}
-        onChange={log("changed")}
-        onSubmit={log("submitted")}
-        onError={log("errors")} />
-), document.getElementById("app"));
+export class FormBuilderPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
+  render() {
+    return (
+      <div>
+        <Helmet
+          title="ResponsePage"
+          meta={[
+            {name: 'description', content: 'Description of ResponsePage'},
+          ]}
+        />
+        <PageBase title="Table Page"
+                  navigation="Application / Table Page">
 
-
+          <Form style={Index}
+                schema={schema}
+                onChange={log("changed")}
+                onSubmit={log("submitted")}
+                onError={log("errors")} />
+        </PageBase>
+      </div>
+    );
+  }
+}
 
 FormBuilderPage.propTypes = {
   dispatch: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
-  FormBuilderPage: makeSelectFormBuilderPage(),
+  ResponsePage: makeSelectResponsePage(),
 });
 
 function mapDispatchToProps(dispatch) {
@@ -53,3 +92,4 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(FormBuilderPage);
+// export default TablePage;

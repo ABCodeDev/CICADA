@@ -91,7 +91,7 @@ class App extends React.PureComponent { // eslint-disable-line react/prefer-stat
     const menus = {
       default_menu : [
           { text: 'DashBoard', icon: <Assessment/>, link: '/dashboard' },
-          { text: 'Form Page', icon: <Web/>, link: '/form' },
+          { text: 'Form Page', icon: <Web/>, link: '/makeForm' },
           { text: 'Response Page', icon: <GridOn/>, link: '/response' },
           { text: 'Login Page', icon: <PermIdentity/>, link: '/loginpage' }
         ]
@@ -102,7 +102,7 @@ class App extends React.PureComponent { // eslint-disable-line react/prefer-stat
         paddingLeft: navDrawerOpen ? paddingLeftDrawerOpen : 0
               },
           container: {
-          margin: '80px 20px 20px 15px',
+          margin: '60px 20px 20px 15px',
           paddingLeft: navDrawerOpen && this.props.width !== SMALL ? paddingLeftDrawerOpen : 0
         }
           };

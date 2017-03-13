@@ -1,9 +1,9 @@
 // import React from 'react';
 // import { shallow } from 'enzyme';
 
-// import { ResponsePage } from '../index';
+// import { FormBuilderPage } from '../index';
 
-describe('<ResponsePage />', () => {
+describe('<FormBuilderPage />', () => {
   it('Expect to have unit tests specified', () => {
     expect(true).toEqual(false);
   });
