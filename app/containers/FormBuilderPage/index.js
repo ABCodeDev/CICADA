@@ -23,6 +23,23 @@ const schema = {
   }
 };
 
+const uiSchema = {
+  foo: {
+    bar: {
+      "ui:widget": "textarea"
+    },
+  },
+  baz: {
+    // note the "items" for an array
+    items: {
+      description: {
+        "ui:widget": "textarea"
+      }
+    }
+  }
+};
+
+
 const styles = {
   floatingActionButton: {
     margin: 0,
@@ -53,6 +70,15 @@ const styles = {
 
 const log = (type) => console.log.bind(console, type);
 
+function ArrayFieldTemplate(props) {
+  return (
+    <div>
+      {props.items.map(element => element.children)}
+      {props.canAdd && <button onClick={props.onAddClick}></button>}
+    </div>
+  );
+}
+
 export class FormBuilderPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
   render() {
     return (
@@ -65,12 +91,19 @@ export class FormBuilderPage extends React.Component { // eslint-disable-line re
         />
         <PageBase title="Table Page"
                   navigation="Application / Table Page">
-          <div style={Index} class="container">
+          <div style={Index}>
             <div id="main">
               <Form schema={schema}
+                    uiSchema={uiSchema}
                     onChange={log("changed")}
                     onSubmit={log("submitted")}
-                    onError={log("errors")} />
+                    onError={log("errors")}
+                    ArrayFieldTemplate={ArrayFieldTemplate}>
+                <div>
+                  <button type="submit">Submit</button>
+                  <button type="button">Cancel</button>
+                </div>
+              </Form>
             </div>
           </div>
         </PageBase>
