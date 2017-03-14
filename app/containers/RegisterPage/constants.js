@@ -13,4 +13,5 @@ export const REGISTER_PROFILE_REQUEST = 'app/RegisterPage/REGISTER_PROFILE_REQUE
 export const REGISTER_PROFILE_SUCCESS = 'app/RegisterPage/REGISTER_PROFILE_SUCCESS';
 export const REGISTER_PROFILE_FAILED = 'app/RegisterPage/REGISTER_PROFILE_FAILED';
 
-export const PROFILE_REGISTRATION = 'user-profile/'
+export const PROFILE_REGISTRATION = 'client/user/'
+

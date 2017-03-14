@@ -1,9 +1,10 @@
 import { take, call, put, select, fork, cancel } from 'redux-saga/effects';
 import { takeLatest } from 'redux-saga';
+import { push } from 'react-router-redux';
 import { LOCATION_CHANGE } from 'react-router-redux';
-import {registerAuthSuccess, registerAuthFailed} from './actions';
+import {registerAuthSuccess, registerAuthFailed, registerProfileFailed} from './actions';
 import request from 'utils/request';
-var token = "";
+import makeSelectRegisterPage  from './selectors';
 
 import {
   REGISTER_AUTH_REQUEST,
@@ -15,6 +16,8 @@ import {
   API_BASE,
   API_AUTH_REGISTRATION,
 } from 'containers/App/constants';
+
+var token = "";
 
 function* attemptRegisterAuth(action){
   console.log("attempt register");
@@ -32,7 +35,8 @@ function* attemptRegisterAuth(action){
 
   if (!registerCall.err) {
     token = "Token " + registerCall.data.key;
-    yield put(registerAuthSuccess());
+    console.log(token)
+    yield put(registerAuthSuccess(token));
   }else{
     yield put(registerAuthFailed("Register Failed"));
   }
@@ -41,28 +45,30 @@ function* attemptRegisterAuth(action){
 function* attemptRegisterProfile(action){
   console.log("attempt register profile");
   const requestURL = `${API_BASE}${PROFILE_REGISTRATION}`;
-  let dataForm = new FormData();
-  //todo user fk
-  dataForm.append('bio',action.payload.profile.bio);
-  dataForm.append('ktp_no',action.payload.profile.ktp_no);
-  dataForm.append('npwp_no',action.payload.profile.npwp_no);
-  dataForm.append('phone_no', action.payload.profile.phone_no);
-  dataForm.append('birth_date', action.payload.profile.birth_date);
-  //todo organization fk
-  //todo access fk
+  console.log(token);
 
-  //todo sesuaikan dengan comment di bawah
-  // const registerCall = yield call(request, requestURL, {
-  //   method: 'POST',
-  //   headers: {},
-  //   body:dataForm
-  // });
+  let obj = {
+    bio:action.payload.profile.bio,
+    ktp_no:action.payload.profile.ktp_no,
+    npwp_no:action.payload.profile.npwp_no,
+    phone_no:action.payload.profile.phone_no,
+    birth_date:action.payload.profile.birth_date
+  }
 
-  // if (!registerCall.err) {
-  //   token = "Token " + registerCall.data.key;
-  // }else{
-  //   yield put(registerFailed("Register Failed"));
-  // }
+  const registerCall = yield call(request, requestURL, {
+    method: 'POST',
+    headers: {
+      'Authorization': token,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(obj)
+  });
+
+  if (!registerCall.err) {
+    yield put (push('/'));
+  }else{
+    yield put(registerProfileFailed("Register Failed"));
+  }
 }
 
 function* registerPageSaga(){

@@ -29,24 +29,37 @@ export function registerAuthRequest(auth){
   };
 }
 
-export function registerProfileRequest(auth){
+export function registerProfileRequest(profile){
   return {
     type: REGISTER_PROFILE_REQUEST,
     payload:{
-      profile: profle,
+      profile: profile,
     }
   };
 }
 
-export function registerAuthSuccess() {
+export function registerAuthSuccess(token) {
   return {
     type : REGISTER_AUTH_SUCCESS,
+    payload:{
+      token: token,
+    }
   }
 }
 
 export function registerAuthFailed(message){
   return {
     type: REGISTER_AUTH_FAILED,
+    payload:{
+      message:message,
+    }
+  };
+}
+
+
+export function registerProfileFailed(message){
+  return {
+    type: REGISTER_PROFILE_FAILED,
     payload:{
       message:message,
     }

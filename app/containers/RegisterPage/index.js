@@ -19,7 +19,7 @@ import PersonAdd from 'material-ui/svg-icons/social/person-add';
 import Help from 'material-ui/svg-icons/action/help';
 import TextField from 'material-ui/TextField';
 import { Link } from 'react-router';
-import { registerAuthRequest } from './actions';
+import { registerAuthRequest, registerProfileRequest } from './actions';
 
 const styles = {
   loginContainer: {
@@ -270,7 +270,7 @@ function mapDispatchToProps(dispatch) {
   return {
     push: (url) => dispatch(push(url)),
     registerAuthRequest:(auth)=>dispatch(registerAuthRequest(auth)),
-    registerProfileRequest:(auth)=>dispatch(registerProfileRequest(auth)),
+    registerProfileRequest:(profile)=>dispatch(registerProfileRequest(profile)),
     dispatch,
   };
 }
