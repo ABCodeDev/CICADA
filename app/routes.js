@@ -58,9 +58,9 @@ export default function createRoutes(store) {
       name: 'responsePage',
       getComponent(nextState, cb) {
         const importModules = Promise.all([
-          import('containers/FormBuilderPage/reducer'),
-          import('containers/FormBuilderPage/sagas'),
-          import('containers/FormBuilderPage'),
+          import('containers/ResponsePage/reducer'),
+          import('containers/ResponsePage/sagas'),
+          import('containers/ResponsePage'),
         ]);
 
         const renderRoute = loadModule(cb);

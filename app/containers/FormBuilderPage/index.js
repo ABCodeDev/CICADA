@@ -65,12 +65,14 @@ export class FormBuilderPage extends React.Component { // eslint-disable-line re
         />
         <PageBase title="Table Page"
                   navigation="Application / Table Page">
-
-          <Form style={Index}
-                schema={schema}
-                onChange={log("changed")}
-                onSubmit={log("submitted")}
-                onError={log("errors")} />
+          <div style={Index} class="container">
+            <div id="main">
+              <Form schema={schema}
+                    onChange={log("changed")}
+                    onSubmit={log("submitted")}
+                    onError={log("errors")} />
+            </div>
+          </div>
         </PageBase>
       </div>
     );
