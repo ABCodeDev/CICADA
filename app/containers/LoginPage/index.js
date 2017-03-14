@@ -115,7 +115,7 @@ export class LoginPage extends React.Component { // eslint-disable-line react/pr
     const loggedIn = this.props.LoginPage.loggedIn;
 
     if(loggedIn){
-      this.props.push('/');
+      this.props.push('/notification');
     }
 
     return (
