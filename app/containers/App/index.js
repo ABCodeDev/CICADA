@@ -90,7 +90,7 @@ class App extends React.PureComponent { // eslint-disable-line react/prefer-stat
 
     const menus = {
       default_menu : [
-          { text: 'DashBoard', icon: <Assessment/>, link: '/trial' },
+          { text: 'DashBoard', icon: <Assessment/>, link: '/notification' },
           { text: 'Make Components', icon: <Web/>, link: '/NotificationComponent' },
           { text: 'Response Page', icon: <GridOn/>, link: '/response' }
         ]

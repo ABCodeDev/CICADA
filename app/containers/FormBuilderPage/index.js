@@ -40,33 +40,6 @@ const uiSchema = {
 };
 
 
-const styles = {
-  floatingActionButton: {
-    margin: 0,
-    top: 'auto',
-    right: 20,
-    bottom: 20,
-    left: 'auto',
-    position: 'fixed',
-  },
-  columns: {
-    id: {
-      width: '10%'
-    },
-    name: {
-      width: '40%'
-    },
-    price: {
-      width: '20%'
-    },
-    category: {
-      width: '20%'
-    },
-    edit: {
-      width: '10%'
-    }
-  }
-};
 
 const log = (type) => console.log.bind(console, type);
 
@@ -89,6 +62,7 @@ export class FormBuilderPage extends React.Component { // eslint-disable-line re
             {name: 'description', content: 'Description of ResponsePage'},
           ]}
         />
+
         <PageBase title="Table Page"
                   navigation="Application / Table Page">
           <div style={Index}>

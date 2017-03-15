@@ -35,13 +35,16 @@ const styles = {
     id: {
       width: '10%'
     },
-    name: {
-      width: '40%'
+    title: {
+      width: '10%'
     },
-    price: {
+    description: {
       width: '20%'
     },
-    category: {
+    created: {
+      width: '20%'
+    },
+    updated: {
       width: '20%'
     },
     edit: {
@@ -67,15 +70,20 @@ export class NotificationPage extends React.PureComponent { // eslint-disable-li
   render() {
     let data = ""
     let token = this.props.global.user.token;
-    if (!this.props.NotificationPage.notification_received && !this.props.NotificationPage.fetch_failed) {
+
+    if (!this.props.NotificationPage.notification_received && !this.props.NotificationPage.fetch_failed)
+    {
       this.props.notificationFetchAction(token);
-    } else {
+    }
+
+    else
+    {
       console.log('done');
     }
 
     if (this.props.NotificationPage.notification_received) {
       data = this.reformatData(this.props.NotificationPage.data);
-      console.log(data);
+      console.log(data.items);
     }
 
     return (
@@ -86,8 +94,8 @@ export class NotificationPage extends React.PureComponent { // eslint-disable-li
             {name: 'description', content: 'Description of ResponsePage'},
           ]}
         />
-        <PageBase title="Table Page"
-                  navigation="Application / Table Page">
+        <PageBase title="Notifications"
+                  navigation="">
 
           <Link to="/form">
             <FloatingActionButton style={styles.floatingActionButton} backgroundColor={pink500}>
@@ -103,16 +111,19 @@ export class NotificationPage extends React.PureComponent { // eslint-disable-li
                 <TableHeaderColumn style={styles.columns.description}>Description</TableHeaderColumn>
                 <TableHeaderColumn style={styles.columns.created}>Created</TableHeaderColumn>
                 <TableHeaderColumn style={styles.columns.updated}>Updated</TableHeaderColumn>
+                <TableHeaderColumn style={styles.columns.edit}>Edit</TableHeaderColumn>
               </TableRow>
             </TableHeader>
             <TableBody>
-              {data.items.map(item =>
+              {this.props.NotificationPage.notification_received == true &&
+              data.items.map(item =>
                 <TableRow key={item.id}>
                   <TableRowColumn style={styles.columns.id}>{item.id}</TableRowColumn>
                   <TableRowColumn style={styles.columns.title}>{item.title}</TableRowColumn>
                   <TableRowColumn style={styles.columns.description}>{item.description}</TableRowColumn>
                   <TableRowColumn style={styles.columns.created}>{item.created}</TableRowColumn>
-                  <TableRowColumn style={styles.columns.updated}>
+                  <TableRowColumn style={styles.columns.updated}>{item.updated}</TableRowColumn>
+                  <TableRowColumn style={styles.columns.edit}>
                     <Link className="button" to="/form">
                       <FloatingActionButton zDepth={0}
                                             mini={true}
