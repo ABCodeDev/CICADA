@@ -10,7 +10,7 @@
  */
 
 export const DEFAULT_LOCALE = 'en';
-export const API_BASE = 'http://localhost:8000/api/v1/';
+export const API_BASE = 'http://192.168.43.84:8000/api/v1/';
 export const API_USER_PROFILE = 'user-profile/';
 
 export const API_AUTH = 'rest-auth/';

@@ -10,7 +10,7 @@ import Helmet from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
 import makeSelectResponsePage from './selectors';
 import PageBase from '../../components/PageBase';
-import Index from "react-bootstrap/lib/index";
+// import Index from "react-bootstrap/lib/index";
 import Form from "react-jsonschema-form";
 
 const schema = {

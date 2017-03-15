@@ -134,6 +134,26 @@ export default function createRoutes(store) {
         importModules.catch(errorLoading);
       },
     }, {
+      path: '/SecretForm',
+      name: 'secretForm',
+      getComponent(nextState, cb) {
+        const importModules = Promise.all([
+          import('containers/SecretForm/reducer'),
+          import('containers/SecretForm/sagas'),
+          import('containers/SecretForm'),
+        ]);
+
+        const renderRoute = loadModule(cb);
+
+        importModules.then(([reducer, sagas, component]) => {
+          injectReducer('secretForm', reducer.default);
+          injectSagas(sagas.default);
+          renderRoute(component);
+        });
+
+        importModules.catch(errorLoading);
+      },
+    }, {
       path: '*',
       name: 'notfound',
       getComponent(nextState, cb) {
