@@ -55,7 +55,24 @@ export class ResponsePage extends React.Component { // eslint-disable-line react
 
   render()
   {
-    console.log(Data.tablePage.items);
+    let data = ""
+    let token = this.props.global.user.token;
+
+    if (!this.props.ResponsePage.response_received && !this.props.ResponsePage.fetch_failed)
+    {
+      this.props.responseFetchAction(token);
+    }
+
+    else
+    {
+      console.log('done');
+    }
+
+    if (this.props.ResponsePage.response_received) {
+      data = this.reformatData(this.props.ResponsePage.data);
+      console.log(data.items);
+    }
+
     return (
       <div>
         <Helmet
@@ -112,14 +129,17 @@ export class ResponsePage extends React.Component { // eslint-disable-line react
 
 ResponsePage.propTypes = {
   dispatch: PropTypes.func.isRequired,
+  responseFetchAction: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
   ResponsePage: makeSelectResponsePage(),
+  global: selectGlobal(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
+    responseFetchAction: (token) => dispatch(responseFetchAction(token)),
     dispatch,
   };
 }

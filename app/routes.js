@@ -94,7 +94,7 @@ export default function createRoutes(store) {
         importModules.catch(errorLoading);
       },
     }, {
-      path: 'NotificationComponent',
+      path: '/NotificationComponent',
       name: 'formBuilderPage',
       getComponent(nextState, cb) {
         const importModules = Promise.all([

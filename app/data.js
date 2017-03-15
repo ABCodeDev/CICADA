@@ -9,7 +9,6 @@ import ExpandMore from 'material-ui/svg-icons/navigation/expand-more';
 import ChevronRight from 'material-ui/svg-icons/navigation/chevron-right';
 
 const data = {
-  tablePage: {
     items: [
       {id: 1, name: 'Product 1', price: '$50.00', category: 'Category 1'},
       {id: 2, name: 'Product 2', price: '$150.00', category: 'Category 2'},
@@ -20,7 +19,6 @@ const data = {
       {id: 7, name: 'Product 7', price: '$550.00', category: 'Category 7'},
       {id: 8, name: 'Product 8', price: '$750.00', category: 'Category 8'}
     ]
-  }
 };
 
 export default data;
