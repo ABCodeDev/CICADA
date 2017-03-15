@@ -94,26 +94,6 @@ export default function createRoutes(store) {
         importModules.catch(errorLoading);
       },
     }, {
-      path: 'notification',
-      name: 'notificationPage',
-      getComponent(nextState, cb) {
-        const importModules = Promise.all([
-          import('containers/NotificationPage/reducer'),
-          import('containers/NotificationPage/sagas'),
-          import('containers/NotificationPage'),
-        ]);
-
-        const renderRoute = loadModule(cb);
-
-        importModules.then(([reducer, sagas, component]) => {
-          injectReducer('notificationPage', reducer.default);
-          injectSagas(sagas.default);
-          renderRoute(component);
-        });
-
-        importModules.catch(errorLoading);
-      },
-    }, {
       path: '*',
       name: 'notfound',
       getComponent(nextState, cb) {
