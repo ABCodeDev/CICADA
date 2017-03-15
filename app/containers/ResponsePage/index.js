@@ -52,7 +52,10 @@ const styles = {
 };
 
 export class ResponsePage extends React.Component { // eslint-disable-line react/prefer-stateless-function
-  render() {
+
+  render()
+  {
+    console.log(Data.tablePage.items);
     return (
       <div>
         <Helmet
